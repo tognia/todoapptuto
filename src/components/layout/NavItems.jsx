@@ -5,7 +5,9 @@ import { connect } from "react-redux";
 const NavItems = () => {
     return (
     <>
-        
+        <Link to="/" className="nav-link">
+          <h4>Dashboard</h4>
+        </Link>
         <Link to="/signin" className="nav-link">
           <h4>Sign In</h4>
         </Link>

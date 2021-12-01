@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { addTask } from '../../actions/taskActions';
 
-class SignUp extends Component {
+class AddTask extends Component {
     sate = {
-        email: "",
-        password: "",
+        task: "",
+        
      };
 
     handleChange = (e) => {
@@ -14,6 +16,7 @@ class SignUp extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        this.props.addTask(this.sate)
         console.log(this.sate);
     };
     render() {
@@ -24,25 +27,28 @@ class SignUp extends Component {
             style={{marginTop: "30px" }}
             onSubmit = {this.handleSubmit}
         > 
-            <legend><h4>Sign Up</h4></legend>
+            <legend><h4>Add Task</h4></legend>
                         <div className="form-group">
-                            <label htmlFor="email">Enter Email</label>
-                            <input type="email" className="form-control" id="email" placeholder="Enter email"
+                            <label htmlFor="task">Add a task</label>
+                            <input type="text" className="form-control" id="task"
                              onChange = {this.handleChange}
                             />
                             
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="password">Enter Password</label>
-                            <input type="password" className="form-control" id="password" placeholder="Password"
-                            onChange = {this.handleChange}/>
-                        </div>
+                        
                         <p></p>
                         
-                        <button type="submit" className="btn btn-primary">Sign Up</button>
+                        <button type="submit" className="btn btn-primary">Add</button>
     </form>
             </>
         )
     }
 }
-export default SignUp
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addTask: task => dispatch(addTask(task))
+    };
+};
+
+export default connect(null, mapDispatchToProps)(AddTask)
