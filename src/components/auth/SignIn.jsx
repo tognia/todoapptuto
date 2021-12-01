@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 
 class SignIn extends Component {
-    sate = {
-        email: "",
-        password: "",
+    
+    state = {
+        email: "fqffqf",
+        password: "qffqfq",
      };
 
+    //handleChange(e) {    this.setState({value: e.target.value});   
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value,
@@ -14,7 +16,7 @@ class SignIn extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.sate);
+        console.log(this.state);
     };
     render() {
         return (
@@ -24,7 +26,10 @@ class SignIn extends Component {
             style={{marginTop: "30px" }}
             onSubmit = {this.handleSubmit}
         > 
-            <legend><h4>Sign In</h4></legend>
+            <legend>
+                {" "}
+                <h4>Sign In</h4>
+            </legend>
                         <div className="form-group">
                             <label htmlFor="email">Enter Email</label>
                             <input type="email" className="form-control" id="email" placeholder="Enter email"

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { addTask } from '../../actions/taskActions';
 
 class AddTask extends Component {
-    sate = {
+    state = {
         task: "",
         
      };
@@ -16,8 +16,8 @@ class AddTask extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.addTask(this.sate)
-        console.log(this.sate);
+        this.props.addTask(this.state)
+        console.log(this.state);
     };
     render() {
         return (
