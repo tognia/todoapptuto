@@ -5,6 +5,7 @@ import { addTask } from '../../actions/taskActions';
 class AddTask extends Component {
     state = {
         task: "",
+        checked: "false"
         
      };
 
@@ -17,12 +18,14 @@ class AddTask extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.addTask(this.state)
+        document.getElementById("addTaskForm").reset();
         console.log(this.state);
     };
     render() {
         return (
             <>
-        <form className="container" 
+        <form className="container"
+            id = "addTaskForm" 
             autoComplete="off" 
             style={{marginTop: "30px" }}
             onSubmit = {this.handleSubmit}

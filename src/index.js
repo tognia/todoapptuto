@@ -13,7 +13,9 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { getFirebase, ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import firebase from './config/firbaseConfig';
-import { createFirebaseInstance } from 'redux-firestore';
+import { createFirestoreInstance } from 'redux-firestore';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const store = createStore(rootReducer, applyMiddleware(thunk.withExtraArgument({getFirebase})));
 
@@ -21,7 +23,7 @@ const rrfProps= {
         firebase,
         config:{},
         dispatch: store.dispatch,
-        createFirebaseInstance
+        createFirestoreInstance
 
 }
 
@@ -30,6 +32,7 @@ ReactDOM.render(
         <Provider store = {store}>
            <ReactReduxFirebaseProvider {...rrfProps}>
         <Router>
+                <ToastContainer />
                 <NavBar/>
                 <h3 className = "text-primary">
                 TodoApp

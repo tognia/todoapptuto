@@ -1,6 +1,9 @@
 import React from 'react';
 import Task from "./Task";
-const Tasks = () => {
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { firestoreConnect } from "react-redux-firebase";
+const Tasks = ({tasks}) => {
     return(
         <>
         <table className="table table-dark container" style={{marginTop: "30px"}}> 
@@ -13,12 +16,31 @@ const Tasks = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <Task />
-                    
+                    {
+                    tasks && tasks.map((task) =><Task task={task} key={task.id} />)                    
+                    }
+                                        
                 </tbody>
         </table>
         </>
     );
 }
 
-export default Tasks;
+const mapStateToProps = state => {
+    console.log(state)
+    const tasks = state.firestore.ordered.tasks;
+    return {
+        tasks: tasks,
+        /*uid: state.firebase.auth.uid*/
+    };
+};
+
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect(ownProps => [
+        {
+        collection: "tasks",
+        orderBy: ["date", "desc"]
+        }
+    ])
+)(Tasks);
