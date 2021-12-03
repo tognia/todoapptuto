@@ -1,7 +1,15 @@
 import React, { Component } from "react";
+import {signIn} from "../../actions/authActions";
+import {connect} from "react-redux";
+import {Navigate } from "react-router-dom";
+import "firebase/compat/auth";
+//import {autobind} from "core-decorators"
+
+//@autobind
 
 class SignIn extends Component {
-    
+
+        
     state = {
         email: "fqffqf",
         password: "qffqfq",
@@ -17,8 +25,16 @@ class SignIn extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         console.log(this.state);
+        //Recupération du state contenant l'email et le password
+        this.props.signIn(this.state)
     };
     render() {
+        /*const { uid } = this.props;
+        if(uid) {
+            return <Navigate to="/" />
+        }*/
+        //else {
+            
         return (
             <>
         <form className="container" 
@@ -48,7 +64,26 @@ class SignIn extends Component {
     </form>
             </>
         )
+            
+       // }
     }
 }
 
-export default SignIn
+/*const mapStateToProps = (state) => {
+    console.log(state)
+    const uid = state.firebase.auth.uid 
+    return {
+        uid : uid
+    }
+  }*/
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+        signIn: (creds) => dispatch(signIn(creds))
+    }
+}
+
+
+//export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default connect(null, mapDispatchToProps)(SignIn);
